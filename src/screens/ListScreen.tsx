@@ -1,11 +1,10 @@
 import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
-import { ITodo } from "../interface/ITodo";
 import { nanoid } from "nanoid";
+import { ITodo, TodoProps } from "../interface/ITodo";
 
-type Props = {};
+type Props = TodoProps & {};
 
-const ListScreen: React.FC<Props> = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+const ListScreen: React.FC<Props> = ({ todos, setTodos }) => {
   const [newTodoLabel, setNewTodoLabel] = useState("");
 
   const handleTodoLabel = (event: ChangeEvent<HTMLInputElement>) =>
