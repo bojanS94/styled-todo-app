@@ -29,15 +29,19 @@ const ListScreen: React.FC<Props> = () => {
       setTodos((todos) =>
         todos.map((todo) => {
           if (todo.id === handleTodo.id)
-            return { ...todos, isComplete: event.target.checked };
+            return { ...todo, isComplete: event.target.checked };
           return todo;
         })
       );
     };
 
+  const handleClearTodoClick = () => {
+    setTodos((todos) => todos.filter((todo) => !todo.isComplete));
+  };
+
   return (
     <div>
-      <ul>
+      <div>
         {todos.map((todo) => (
           <div key={todo.id}>
             <input
@@ -48,12 +52,13 @@ const ListScreen: React.FC<Props> = () => {
             {todo.label}
           </div>
         ))}
-      </ul>
+      </div>
       <input
         value={newTodoLabel}
         onChange={handleTodoLabel}
         onKeyDown={handleNewTodoLabelChange}
       />
+      <button onClick={handleClearTodoClick}>Clear complete todos</button>
     </div>
   );
 };
