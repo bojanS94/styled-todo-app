@@ -6,7 +6,6 @@ type Props = {};
 
 const ListScreen: React.FC<Props> = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
-
   const [newTodoLabel, setNewTodoLabel] = useState("");
 
   const handleTodoLabel = (event: ChangeEvent<HTMLInputElement>) =>
@@ -35,9 +34,11 @@ const ListScreen: React.FC<Props> = () => {
       );
     };
 
-  const handleClearTodoClick = () => {
+  const handleClearTodoClick = () =>
     setTodos((todos) => todos.filter((todo) => !todo.isComplete));
-  };
+
+  const handleDeleteTodo = (handleTodo: ITodo) => () =>
+    setTodos((todos) => todos.filter((todo) => todo.id !== handleTodo.id));
 
   return (
     <div>
@@ -50,6 +51,7 @@ const ListScreen: React.FC<Props> = () => {
               onChange={handleTodoIsComplete(todo)}
             />
             {todo.label}
+            <button onClick={handleDeleteTodo(todo)}>Delete Todo</button>
           </div>
         ))}
       </div>
