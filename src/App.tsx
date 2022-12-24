@@ -6,7 +6,17 @@ import ListScreen from "./screens/ListScreen";
 
 function App() {
   const [todos, setTodos] = useState<ITodo[]>([]);
-  const todoProps = { todos, setTodos };
+
+  const updateTodoCompletion = (todoId: string, isComplete: boolean) => {
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === todoId) return { ...todo, isComplete };
+        return todo;
+      })
+    );
+  };
+
+  const todoApi = { todos, setTodos, updateTodoCompletion };
 
   return (
     <BrowserRouter>
@@ -21,10 +31,10 @@ function App() {
       </nav>
       <Switch>
         <Route exact path="/">
-          <ListScreen {...todoProps} />
+          <ListScreen {...todoApi} />
         </Route>
         <Route path="/focus">
-          <FocusScreen {...todoProps} />
+          <FocusScreen {...todoApi} />
         </Route>
       </Switch>
     </BrowserRouter>

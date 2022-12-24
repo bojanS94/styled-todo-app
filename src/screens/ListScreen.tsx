@@ -4,7 +4,11 @@ import { ITodo, TodoProps } from "../interface/ITodo";
 
 type Props = TodoProps & {};
 
-const ListScreen: React.FC<Props> = ({ todos, setTodos }) => {
+const ListScreen: React.FC<Props> = ({
+  todos,
+  setTodos,
+  updateTodoCompletion,
+}) => {
   const [newTodoLabel, setNewTodoLabel] = useState("");
 
   const handleTodoLabel = (event: ChangeEvent<HTMLInputElement>) =>
@@ -23,14 +27,8 @@ const ListScreen: React.FC<Props> = ({ todos, setTodos }) => {
   };
 
   const handleTodoIsComplete =
-    (handleTodo: ITodo) => (event: ChangeEvent<HTMLInputElement>) => {
-      setTodos((todos) =>
-        todos.map((todo) => {
-          if (todo.id === handleTodo.id)
-            return { ...todo, isComplete: event.target.checked };
-          return todo;
-        })
-      );
+    (todo: ITodo) => (event: ChangeEvent<HTMLInputElement>) => {
+      updateTodoCompletion(todo.id, event.target.checked);
     };
 
   const handleClearTodoClick = () =>
