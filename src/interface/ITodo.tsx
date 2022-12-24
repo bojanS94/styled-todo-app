@@ -9,5 +9,6 @@ export type TodoProps = {
   focusedTodo?: ITodo;
   todos: ITodo[];
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
+  randomFocusedTodo: () => void;
   updateTodoCompletion: (todoId: string, isComplete: boolean) => void;
 };

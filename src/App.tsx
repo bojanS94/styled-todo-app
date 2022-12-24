@@ -13,10 +13,12 @@ function App() {
   );
 
   const addTodo = (todo: Pick<ITodo, "label">) => {
+    const id = nanoid();
     setTodos((todos) => [
       ...todos,
-      { id: nanoid(), label: todo.label, isComplete: false },
+      { id, label: todo.label, isComplete: false },
     ]);
+    if (!focusedTodo) setFocusedTodoId(id);
   };
 
   const updateTodoCompletion = (todoId: string, isComplete: boolean) => {
@@ -30,7 +32,7 @@ function App() {
 
   const focusedTodo = todos.find((todo) => todo.id === focusedTodoId);
 
-  const randomFocusedTask = () => {
+  const randomFocusedTodo = () => {
     setFocusedTodoId(
       shuffle(todos.filter((todo) => !todo.isComplete))[0]?.id ?? null
     );
@@ -41,7 +43,7 @@ function App() {
     focusedTodo,
     todos,
     setTodos,
-    randomFocusedTask,
+    randomFocusedTodo,
     updateTodoCompletion,
   };
 

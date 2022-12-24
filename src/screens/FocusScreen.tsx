@@ -6,6 +6,7 @@ type Props = TodoProps & {};
 const FocusScreen: React.FC<Props> = ({
   focusedTodo: todo,
   updateTodoCompletion,
+  randomFocusedTodo,
 }) => {
   const handleMarkCompleted = () => {
     if (todo) updateTodoCompletion(todo.id, true);
@@ -15,7 +16,7 @@ const FocusScreen: React.FC<Props> = ({
     <div>
       <div>{todo.label}</div>
       <button onClick={handleMarkCompleted}>Mark completed</button>
-      <button>Ignore this todo.</button>
+      <button onClick={randomFocusedTodo}>Ignore this todo.</button>
     </div>
   ) : (
     <div>No active todos!</div>
