@@ -5,7 +5,9 @@ export interface ITodo {
 }
 
 export type TodoProps = {
+  addTodo: (todo: Pick<ITodo, "label">) => void;
+  focusedTodo?: ITodo;
   todos: ITodo[];
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
-  updateTaskCompletion: (todoId: string, isComplete: boolean) => void;
+  updateTodoCompletion: (todoId: string, isComplete: boolean) => void;
 };

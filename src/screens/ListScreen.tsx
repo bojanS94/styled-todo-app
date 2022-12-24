@@ -1,10 +1,10 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
-import { nanoid } from "nanoid";
+import React, { ChangeEvent, useState } from "react";
 import { ITodo, TodoProps } from "../interface/ITodo";
 
 type Props = TodoProps & {};
 
 const ListScreen: React.FC<Props> = ({
+  addTodo,
   todos,
   setTodos,
   updateTodoCompletion,
@@ -18,10 +18,7 @@ const ListScreen: React.FC<Props> = ({
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === "Enter" && newTodoLabel !== "") {
-      setTodos((todos) => [
-        ...todos,
-        { id: nanoid(), label: newTodoLabel, isComplete: false },
-      ]);
+      addTodo({ label: newTodoLabel });
       setNewTodoLabel("");
     }
   };

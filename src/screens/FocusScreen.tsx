@@ -3,17 +3,19 @@ import { TodoProps } from "../interface/ITodo";
 
 type Props = TodoProps & {};
 
-const FocusScreen: React.FC<Props> = ({ todos, updateTodoCompletion }) => {
-  const todo = todos.filter((todo) => !todo.isComplete)[0];
-
+const FocusScreen: React.FC<Props> = ({
+  focusedTodo: todo,
+  updateTodoCompletion,
+}) => {
   const handleMarkCompleted = () => {
-    updateTodoCompletion(todo.id, true);
+    if (todo) updateTodoCompletion(todo.id, true);
   };
 
   return todo ? (
     <div>
       <div>{todo.label}</div>
       <button onClick={handleMarkCompleted}>Mark completed</button>
+      <button>Ignore this todo.</button>
     </div>
   ) : (
     <div>No active todos!</div>
