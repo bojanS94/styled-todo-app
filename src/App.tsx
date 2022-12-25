@@ -2,12 +2,13 @@ import { shuffle } from "lodash";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
+import useLocalStorage from "./hooks/use-local-storage";
 import { ITodo } from "./interface/ITodo";
 import FocusScreen from "./screens/FocusScreen";
 import ListScreen from "./screens/ListScreen";
 
 function App() {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+  const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
   const [focusedTodoId, setFocusedTodoId] = useState<string | undefined>(
     undefined
   );
