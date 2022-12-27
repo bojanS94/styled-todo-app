@@ -1,13 +1,15 @@
 import React from "react";
-import { TodoProps } from "../interface/ITodo";
+import useTodoStore from "../hooks/use-todo-store";
 
-type Props = TodoProps & {};
+type Props = {};
 
-const FocusScreen: React.FC<Props> = ({
-  focusedTodo: todo,
-  updateTodoCompletion,
-  randomFocusedTodo,
-}) => {
+const FocusScreen: React.FC<Props> = () => {
+  const {
+    focusedTodo: todo,
+    updateTodoCompletion,
+    randomFocusedTodo,
+  } = useTodoStore();
+
   const handleMarkCompleted = () => {
     if (todo) updateTodoCompletion(todo.id, true);
   };

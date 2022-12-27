@@ -1,14 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
-import { ITodo, TodoProps } from "../interface/ITodo";
+import useTodoStore from "../hooks/use-todo-store";
+import { ITodo } from "../interface/ITodo";
 
-type Props = TodoProps & {};
+type Props = {};
 
-const ListScreen: React.FC<Props> = ({
-  addTodo,
-  todos,
-  setTodos,
-  updateTodoCompletion,
-}) => {
+const ListScreen: React.FC<Props> = () => {
+  const { addTodo, todos, setTodos, updateTodoCompletion } = useTodoStore();
+
   const [newTodoLabel, setNewTodoLabel] = useState("");
 
   const handleTodoLabel = (event: ChangeEvent<HTMLInputElement>) =>
