@@ -1,13 +1,17 @@
 import { shuffle } from "lodash";
 import { nanoid } from "nanoid";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TodoContext from "../contexts/todo-store";
 import { ITodo } from "../interface/ITodo";
 
 const useTodoStore = () => {
   const [todos, setTodos] = useContext(TodoContext);
+
+  const getIncompleteTodo = () => todos.filter((todo) => !todo.isComplete)[0]?.id
+
+
   const [focusedTodoId, setFocusedTodoId] = useState<string | undefined>(
-    undefined
+    getIncompleteTodo()
   );
 
   const addTodo = (todo: Pick<ITodo, "label">) => {
@@ -29,6 +33,10 @@ const useTodoStore = () => {
   };
 
   const focusedTodo = todos.find((todo) => todo.id === focusedTodoId);
+
+  useEffect(() => {
+    if (focusedTodo?.isComplete) setFocusedTodoId(getIncompleteTodo());
+  }, [todos, focusedTodo])
 
   const randomFocusedTodo = () => {
     setFocusedTodoId(
