@@ -1,9 +1,29 @@
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import TodoContext from "./contexts/todo-store";
 import useLocalStorage from "./hooks/use-local-storage";
 import { ITodo } from "./interface/ITodo";
 import FocusScreen from "./screens/FocusScreen";
 import ListScreen from "./screens/ListScreen";
+import { colors } from "./styles";
+
+const NavStyle = styled.nav`
+  display: flex;
+  max-width: 600px;
+  width: 100%;
+`;
+
+const TabButton = styled(NavLink)`
+  max-width: 300px;
+  width: 100%;
+  background: red;
+  color: black;
+
+  &:active {
+    background-color: ${colors.primary};
+    color: white;
+  }
+`;
 
 function App() {
   const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
@@ -11,15 +31,15 @@ function App() {
   return (
     <BrowserRouter>
       <TodoContext.Provider value={[todos, setTodos]}>
-        <nav>
-          <NavLink exact to={"/"} activeStyle={{ fontWeight: "bold" }}>
+        <NavStyle>
+          <TabButton exact to={"/"} activeStyle={{ fontWeight: "bold" }}>
             List
-          </NavLink>{" "}
+          </TabButton>{" "}
           -{" "}
           <NavLink to={"/focus"} activeStyle={{ fontWeight: "bold" }}>
             Focus
           </NavLink>
-        </nav>
+        </NavStyle>
         <Switch>
           <Route exact path="/">
             <ListScreen />
