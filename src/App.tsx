@@ -3,8 +3,8 @@ import styled from "styled-components";
 import TodoContext from "./contexts/todo-store";
 import useLocalStorage from "./hooks/use-local-storage";
 import { ITodo } from "./interface/ITodo";
-import FocusScreen from "./screens/FocusScreen";
-import ListScreen from "./screens/ListScreen";
+import TodoFocusScreen from "./screens/TodoFocusScreen";
+import TodoListScreen from "./screens/TodoListScreen";
 import { colors, GlobalStyle } from "./styles";
 
 const LayoutWrapper = styled.div`
@@ -67,10 +67,10 @@ function App() {
 
             <Switch>
               <Route exact path="/">
-                <ListScreen />
+                <TodoListScreen />
               </Route>
               <Route path="/focus">
-                <FocusScreen />
+                <TodoFocusScreen />
               </Route>
             </Switch>
           </LayoutWrapper>

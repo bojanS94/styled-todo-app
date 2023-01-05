@@ -3,7 +3,7 @@ import useTodoStore from "../hooks/use-todo-store";
 
 type Props = {};
 
-const FocusScreen: React.FC<Props> = () => {
+const TodoFocusScreen: React.FC<Props> = () => {
   const {
     focusedTodo: todo,
     updateTodoCompletion,
@@ -25,4 +25,4 @@ const FocusScreen: React.FC<Props> = () => {
   );
 };
 
-export default FocusScreen;
+export default TodoFocusScreen;

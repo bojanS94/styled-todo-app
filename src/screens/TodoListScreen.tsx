@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from "react";
+import Checkbox from "../components/Checkbox";
 import useTodoStore from "../hooks/use-todo-store";
 import { ITodo } from "../interface/ITodo";
 
 type Props = {};
 
-const ListScreen: React.FC<Props> = () => {
+const TodoListScreen: React.FC<Props> = () => {
   const { addTodo, todos, setTodos, updateTodoCompletion } = useTodoStore();
 
   const [newTodoLabel, setNewTodoLabel] = useState("");
@@ -12,10 +13,8 @@ const ListScreen: React.FC<Props> = () => {
   const handleTodoLabel = (event: ChangeEvent<HTMLInputElement>) =>
     setNewTodoLabel(event.target.value);
 
-  const handleNewTodoLabelChange = (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (event.key === "Enter" && newTodoLabel !== "") {
+  const handleNewTodoKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && newTodoLabel !== "") {
       addTodo({ label: newTodoLabel });
       setNewTodoLabel("");
     }
@@ -37,8 +36,7 @@ const ListScreen: React.FC<Props> = () => {
       <div>
         {todos.map((todo) => (
           <div key={todo.id}>
-            <input
-              type="checkbox"
+            <Checkbox
               checked={todo.isComplete}
               onChange={handleTodoIsComplete(todo)}
             />
@@ -48,13 +46,14 @@ const ListScreen: React.FC<Props> = () => {
         ))}
       </div>
       <input
+        placeholder="Enter a todo item"
         value={newTodoLabel}
         onChange={handleTodoLabel}
-        onKeyDown={handleNewTodoLabelChange}
+        onKeyDown={handleNewTodoKeyPress}
       />
       <button onClick={handleClearTodoClick}>Clear complete todos</button>
     </div>
   );
 };
 
-export default ListScreen;
+export default TodoListScreen;
