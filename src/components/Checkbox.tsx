@@ -31,11 +31,13 @@ const StyledCheckbox = styled.div<{ checked: boolean }>`
 
 type Props = ComponentProps<StyledComponent<"input", any, {}>>;
 
-const Checkbox: React.FC<Props> = ({ checked, ...props }) => (
-  <CheckboxContainer>
-    <HiddenCheckbox type="checkbox" {...props} checked={checked} />
-    <StyledCheckbox checked={checked}></StyledCheckbox>
-  </CheckboxContainer>
-);
+const Checkbox: React.FC<Props> = ({ checked, ...props }) => {
+  return (
+    <CheckboxContainer>
+      <HiddenCheckbox type="checkbox" {...props} checked={checked} />
+      <StyledCheckbox checked={checked}></StyledCheckbox>
+    </CheckboxContainer>
+  );
+};
 
 export default Checkbox;

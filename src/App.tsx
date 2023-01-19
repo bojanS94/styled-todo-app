@@ -1,8 +1,7 @@
 import { BrowserRouter, NavLink, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import TodoContext from "./contexts/todo-store";
-import useLocalStorage from "./hooks/use-local-storage";
-import { ITodo } from "./interface/ITodo";
+
+import TodosProvider from "./providers/TodosProvider";
 import TodoFocusScreen from "./screens/TodoFocusScreen";
 import TodoListScreen from "./screens/TodoListScreen";
 import { colors, GlobalStyle } from "./styles";
@@ -48,13 +47,11 @@ const TabButton = styled(NavLink)`
 `;
 
 function App() {
-  const [todos, setTodos] = useLocalStorage<ITodo[]>("todos", []);
-
   return (
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <TodoContext.Provider value={[todos, setTodos]}>
+        <TodosProvider>
           <LayoutWrapper>
             <NavStyle>
               <TabButton exact to={"/"} activeClassName="active">
@@ -74,7 +71,7 @@ function App() {
               </Route>
             </Switch>
           </LayoutWrapper>
-        </TodoContext.Provider>
+        </TodosProvider>
       </BrowserRouter>
     </>
   );
